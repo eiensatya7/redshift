@@ -15,6 +15,9 @@ Route::get('/', function() {
     return 'hello';
 });
 
-Route::get('register', function() {
-    return View::make('registration_form');
-});
+Route::get('register', 'RegistrationController@renderForm');
+
+Route::post('register', 'RegistrationController@submitForm');
+
+
+?>
