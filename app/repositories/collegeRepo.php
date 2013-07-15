@@ -2,11 +2,13 @@
 
 class CollegeRepo{
 
-	public function save(){
-
+	public function save($collegeArr){
+		$college= new College;
+		$college->fill($collegeArr);
+		$college->save();
 	}
 
-	public function getList(){
+	public function findAll(){
 		return College::all();
 	}
 

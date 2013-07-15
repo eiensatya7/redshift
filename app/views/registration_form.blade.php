@@ -25,10 +25,10 @@
                     <div class="contol-group">
                         <label class="redshift-control-label" for="college">User Type</label>
                         <div class="redshift-controls">
-                            <select id="user_type" name="user_type">         
-                                <option value="student">Student</option>
-                                <option value="faculty">Faculty</option>
-                                <option value="admin">Admin</option>
+                            <select id="user_type" name="user_type">    
+                                @foreach($groups as $group)     
+                                <option value="{{$group}}">{{$group}}</option>
+                                @endforeach
                             </select>
 
 
@@ -81,10 +81,10 @@
                     <div class="contol-group">
                         <label class="redshift-control-label" for="college">College</label>
                         <div class="redshift-controls">
-                            <select id="college" name="college">                         
-                                <option value="1" title="Chaitanya Institute O">CIET</option>
-                                <option value="2" title="Chaitanya Institute O">CIET</option>
-                                <option value="3" title="Chaitanya Institute O">CIET</option>
+                            <select id="college" name="college">
+                                @foreach($colleges as $college)                        
+                                <option value="{{$college->id}}" title="{{$college->name}}">{{$college->alias}}</option>
+                                @endforeach                                
                             </select>
 
 
@@ -95,11 +95,9 @@
                         <label class="redshift-control-label" for="year">Year</label>
                         <div class="redshift-controls">
                             <select id="year" name="year">
-                                <option value="1">I year</option>
-                                <option value="2">II year</option>
-                                <option value="3">III year</option>
-                                <option value="4">IV year</option>
-                                <option value="5">Na</option>
+                                @foreach($years as $year)
+                                <option value="{{$year->id}}">{{$year->alias}}</option>
+                                @endforeach
                             </select>
 
                         </div>
@@ -109,10 +107,9 @@
                         <label class="redshift-control-label" for="branch">Branch</label>
                         <div class="redshift-controls">
                             <select id="year" name="year">
-                                <option value="cse">cse</option>
-                                <option value="cse">cse</option>
-                                <option value="cse">cse</option>
-                                <option value="cse">cse</option>
+                                @foreach($branches as $branch)
+                                <option value="{{$branch->id}}" title="{{$branch->name}}">{{$branch->alias}}</option>
+                                @endforeachs
                             </select>
 
                         </div>

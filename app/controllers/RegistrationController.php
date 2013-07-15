@@ -12,11 +12,14 @@ class RegistrationController extends BaseController{
 
 	public function renderForm() {
 		Log::info('In render form ');
-		$collegeList=$this->registrationService->getColleges();
-		return View::make('registration_form')->with('collegeList',$collegeList);
+		$colleges=$this->registrationService->getColleges();
+		$branches=$this->registrationService->getBranches();
+		$years=$this->registrationService->getYears();
+		$generalUserGroups=$this->registrationService->getGeneralUserGroups();
+		return View::make('registration_form')->with('colleges',$colleges)->with('branches',$branches)->with('years',$years)->with('groups',$generalUserGroups);
 	}
 
-	public function submitForm() {
+	public function onSubmitForm() {
 
 		if(Input::get('user_type') === 'student'){
 			$student=new Student;

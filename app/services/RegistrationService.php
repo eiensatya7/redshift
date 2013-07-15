@@ -30,22 +30,23 @@ class RegistrationService {
 	 * expects unvalidated Student object
 	 */
 	public function saveStudent(student $student){
-		//validate and call repo
-        $this->studentRepo->save($student);		
-	}
+        return $this->studentRepo->save($student);		
+    }
 
-	public function getColleges(){
-		return $this->collegeRepo->getList();
-	}
+    public function getColleges(){
+      return $this->collegeRepo->findAll();
+  }
 
+  public function getBranches(){
+    return $this->studentRepo->findAllBranches();
 
+}
+public function getYears(){
+    return $this->studentRepo->findAllBranches();
+}
 
-
-
-
-
-
-
-
+public function getGeneralUserGroups(){
+    return ConfigConst::$generalUserGroups;
+}
 }
 ?>

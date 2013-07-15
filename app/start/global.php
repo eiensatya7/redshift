@@ -11,13 +11,23 @@ App::bind('CollegeRepo',function(){
 	return new CollegeRepo;
 });
 
+
+
+
 App::bind('RegistrationService',function(){
 	Log::info('Binding RegistrationService');
 	$rs = new RegistrationService();
 	$rs->setStudentRepo(App::make('StudentRepo'));
 	$rs->setCollegeRepo(App::make('CollegeRepo'));
-
 	return $rs;
+});
+App::bind('SuperUserService',function(){
+	Log::info('Binding SuperUserService');
+	$sus= new SuperUserService();
+	$sus->setCollegeRepo(App::make('CollegeRepo'));
+	$sus->setStudentRepo(App::make('StudentRepo'));
+	return $sus;
+
 });
 
 
@@ -43,7 +53,7 @@ ClassLoader::addDirectories(array(
 	app_path().'/repositories',
 	app_path().'/models',
 	app_path().'/dataObjects',
-	app_path().'/registrar',
+	app_path().'/constants',	
 	app_path().'/database/seeds',
 
 	));

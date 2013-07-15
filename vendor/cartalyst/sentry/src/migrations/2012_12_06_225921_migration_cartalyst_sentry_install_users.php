@@ -30,7 +30,8 @@ class MigrationCartalystSentryInstallUsers extends Migration {
 	public function up()
 	{
 		Schema::create('users', function($table)
-		{
+		{  
+			$table -> engine = 'InnoDB';
 			$table->increments('id');
 			$table->string('email');
 			$table->string('password');
@@ -43,7 +44,8 @@ class MigrationCartalystSentryInstallUsers extends Migration {
 			$table->string('reset_password_code')->nullable();
 			$table->string('first_name')->nullable();
 			$table->string('last_name')->nullable();
-			$table->string('nick')->nullable();			
+			$table->string('nick')->nullable();
+			
 			$table->timestamps();
 
 			// We'll need to ensure that MySQL uses the InnoDB engine to

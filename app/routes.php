@@ -11,13 +11,19 @@
  |
  */
 
-Route::get('/', function() {
-    return 'hello';
-});
+ Route::get('/', function() {
+ 	return 'hello';
+ });
 
-Route::get('register', 'RegistrationController@renderForm');
+ Route::get('register', 'RegistrationController@renderForm');
+ Route::post('register', 'RegistrationController@onSubmitForm');
 
-Route::post('register', 'RegistrationController@submitForm');
+ Route::get('superUser','SuperUserController@renderForm');
+
+ Route::get('superUserAsc','SuperUserController@ajaxGet');
+ Route::post('superUserAsc','SuperUserController@ajaxPost');
 
 
-?>
+
+
+ ?>

@@ -2,8 +2,10 @@
 
 class College extends Eloquent implements Element{
 	protected $table = 'colleges';
-	protected $primaryKey = 'id';
+	protected $key = 'id';
 	private $elementId;
+    protected $guarded = array('id', 'created_at','updated_at');
+
 
 	public function students(){
 
