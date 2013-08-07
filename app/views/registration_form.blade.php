@@ -1,255 +1,181 @@
-@extends('derived_layout.form_layout')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Registeration Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @include('main_layout.main_includes')
+    <link href="css/redshift-form.css" rel="stylesheet" media="screen"> 
+</head>
+<body>
+    @include('main_layout.main_header_layout')
 
-@section('title')
-Registration Form
-@stop
-@section('form_content')
-<script type="text/javascript" src="js/vendor/jquery.validationEngine-en.js"></script>
-<script type="text/javascript" src="js/vendor/jquery.validationEngine.js"></script>
+    <div class="container redshift-container-addon">
 
-<link href="css/vendor/validationEngine.css" rel="stylesheet" type="text/css" />
-<link href="css/registration_form.css" rel="stylesheet" type="text/css" />
+      <br/>
 
-<script>
-	$(document).ready(function() {
+      <div class="row">
+        <div class="span8 redshift-center">
+            <form class="form-horizontal redshift-form-horizontal-addon" action="/register">
+                <?php echo Form::token()?>
+                <fieldset>
+                    <legend><div class="redshift-legend">Registration Form</div><div class="pull-right"></div></legend>
+                    <br />
 
-		$("#radioset").buttonset();
-		$(".button_style_ui").button();
-		$("#form_ref1").validationEngine();
 
-		if ($("#radio1").prop('checked')) {
-			$("#form_ref1").show();
-			$("#form_ref2").hide();
-			$("#form_ref3").hide();
-		}
-		if ($("#radio2").prop('checked')) {
-			$("#form_ref1").hide();
-			$("#form_ref2").show();
-			$("#form_ref3").hide();
-		}
+                    <div class="contol-group">
+                        <label class="redshift-control-label" for="college">User Type</label>
+                        <div class="redshift-controls">
+                            <select id="user_type" name="user_type">         
+                                <option value="student">Student</option>
+                                <option value="faculty">Faculty</option>
+                                <option value="admin">Admin</option>
+                            </select>
 
-		if ($("#radio3").prop('checked')) {
-			$("#form_ref1").hide();
-			$("#form_ref2").hide();
-			$("#form_ref3").show();
-		}
 
-		$("#radio1").click(function() {
-			$("#form_ref1").show('slow');
-			$("#form_ref2").hide();
-			$("#form_ref3").hide();
-		});
-		$("#radio2").click(function() {
-			$("#form_ref1").hide();
-			$("#form_ref2").show('slow');
-			$("#form_ref3").hide();
-		});
-		$("#radio3").click(function() {
-			$("#form_ref1").hide();
-			$("#form_ref2").hide();
-			$("#form_ref3").show('slow');
-		});
-
-	});
-</script>
-<div id= "center_ccd">
-    <div id = "center_cccd">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-                <td width="49%">
-                <div id="left_top_ccd">
-                    Registration Form
-                </div></td>
-                <td width="51%">
-                <div id="form_sel">
-                    <div id="radioset">
-                        <input type="radio" id="radio1" name="radio" checked="checked">
-                        <label for="radio1">
-                            <div class="button_text_style2">
-                                Student
-                            </div></label>
-                        <input type="radio" id="radio2" name="radio" >
-                        <label for="radio2">
-                            <div class="button_text_style2">
-                                Faculty
-                            </div></label>
-                        <input type="radio" id="radio3" name="radio">
-                        <label for="radio3">
-                            <div class="button_text_style2">
-                                Recriter
-                            </div></label>
+                        </div>
                     </div>
-                </div></td>
-            </tr>
-        </table>
-        <br />
-        <hr width="93%"/>
-        <br />
-        <div id= "formElements" >
-            <form id= "form_ref1" class="form_style1" action="#">
-                <table width="100%" border="0" cellpadding="10" cellspacing="0">
-                    <tr>
-                        <td width="28%" class="table_lable">Name &nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="name" id="form_ref1_name" type="text" size="30" />
-                        </td>
-                    </tr>
+                    <br />
+                    <div class="contol-group">
+                        <label class="redshift-control-label" for="name">Name</label>
+                        <div class="redshift-controls">
+                            <input type="text" id="name" name ="name" placeholder="Enter Name">
 
-                    <tr>
-                        <td width="28%" class="table_lable">Registration ID&nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="regID"  id="form_ref1_regID" type="text" size="30" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">Email&nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="email" iid="form_ref1_email" type="text" size="30" class="validate[required,custom[email]]"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">Password &nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="password" id="form_ref1_password" type="password" size="30" class="validate[required,custom[passwd]" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">Retype Password &nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="retype_password" id="form_ref1_retype_password" type="password" size="30" class="validate[required,custom[passwd]"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">College&nbsp; &nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <select name="college" id="form_ref1_college">
-                            <option value="select" selected="selected">--select--</option>
-                            <option value="ciet">CIET</option>
-                            <option value="giet">GIET</option>
-                        </select></td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">Year&nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input id="form_ref1_year" name="year" type="text" size="30" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">Branch&nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input id="form_ref1_branch" name="branch" type="text" size="30" />
-                        </td>
-                    </tr>
-                </table>
-                <br/>
-                <br/>
-                <div id="bottom_button_ccd">
-                    <input type="submit"  name= "submit" value = "Submit" class= "button_style_ui button_text_style2"/>
-                    <input type="reset"  name= "reset" value = "Reset" class= "button_style_ui button_text_style2"/>
-                </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="contol-group">
+                        <label class="redshift-control-label" for="reg_id">Registration ID</label>
+                        <div class="redshift-controls">
+                            <input type="text" id="reg_id" name ="reg_id" placeholder="Enter Registration ID">
+
+                        </div>
+                    </div>
+                    <br />
+
+
+
+                    <div class="contol-group">
+                        <label class="redshift-control-label" for="email">Email</label>
+                        <div class="redshift-controls">
+                            <input type="text" id="email" name ="email" placeholder="Enter Email">
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="contol-group">
+                        <label class="redshift-control-label" for="password">Password</label>
+                        <div class="redshift-controls">
+                            <input type="password" id="password" name ="password" placeholder="Enter Password">
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="contol-group">
+                        <label class="redshift-control-label" for="retype_password">Retype Password</label>
+                        <div class="redshift-controls">
+                            <input type="password" id="retype_password" name ="retype_password" placeholder="Retype Password">
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="contol-group">
+                        <label class="redshift-control-label" for="college">College</label>
+                        <div class="redshift-controls">
+                            <select id="college" name="college">                         
+                                <option value="1" title="Chaitanya Institute O">CIET</option>
+                                <option value="2" title="Chaitanya Institute O">CIET</option>
+                                <option value="3" title="Chaitanya Institute O">CIET</option>
+                            </select>
+
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="contol-group">
+                        <label class="redshift-control-label" for="year">Year</label>
+                        <div class="redshift-controls">
+                            <select id="year" name="year">
+                                <option value="1">I year</option>
+                                <option value="2">II year</option>
+                                <option value="3">III year</option>
+                                <option value="4">IV year</option>
+                                <option value="5">Na</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="contol-group">
+                        <label class="redshift-control-label" for="branch">Branch</label>
+                        <div class="redshift-controls">
+                            <select id="year" name="year">
+                                <option value="cse">cse</option>
+                                <option value="cse">cse</option>
+                                <option value="cse">cse</option>
+                                <option value="cse">cse</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+
+                    <hr />
+                    <div class="redshift-form-actions pull-right">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                        <button type="button" class="btn">Cancel</button>
+                    </div>
+
+                </fieldset>
+                <br />
             </form>
-            <form id= "form_ref2" class="form_style1">
-                <table width="100%" border="0" cellpadding="10" cellspacing="0">
-                    <tr>
-                        <td width="28%" class="table_lable">Name2 &nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="name" type="text" size="30" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">Name&nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="name" type="text" size="30" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">Age &nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="name" type="text" size="30" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">Grade&nbsp; &nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="name" type="text" size="30" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">Class &nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="name" type="text" size="30" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">Description &nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">                        <textarea name="textarea" id="textarea" cols="25" rows="5"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">NewsLetter&nbsp; &nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="name" type="text" size="30" />
-                        </td>
-                    </tr>
-                </table>
-                <br/>
-                <br/>
-                <div id="bottom_button_ccd">
-                    <input type="submit" name= "submit" value = "Submit" class= "button_style_ui button_text_style2"/>
-                    <input type="reset" name= "reset" value = "Reset" class= "button_style_ui button_text_style2"/>
-                </div>
-            </form>
-            <form id= "form_ref3" class="form_style1">
-                <table width="100%" border="0" cellpadding="10" cellspacing="0">
-                    <tr>
-                        <td width="28%" class="table_lable">Name3 &nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="name" type="text" size="30" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">Name&nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="name" type="text" size="30" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">Age &nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="name" type="text" size="30" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">Grade&nbsp; &nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="name" type="text" size="30" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">Class &nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="name" type="text" size="30" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">Description &nbsp;&nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">                        <textarea name="textarea" id="textarea" cols="25" rows="5"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td width="28%" class="table_lable">NewsLetter&nbsp; &nbsp;|&nbsp;</td>
-                        <td width="72%" class="table_field">
-                        <input name="name" type="text" size="30" />
-                        </td>
-                    </tr>
-                </table>
-                <br/>
-                <br/>
-                <div id="bottom_button_ccd">
-                    <input type="submit" name= "submit" value = "Submit" class= "button_style_ui button_text_style2"/>
-                    <input type="reset" name= "reset" value = "Reset" class= "button_style_ui button_text_style2"/>
-                </div>
-            </form>
+
         </div>
     </div>
+
+
 </div>
-<div id="bottom_ccd"></div>
-@stop
+@include('main_layout.main_footer_layout')
+
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+    $("#user_type").change(function(){
+
+        if($(this).val() == 'faculty'){        
+            window.location.href='faculty.htm';
+        }
+        else if($(this).val() == 'admin'){
+            window.location.href='admin.htm';
+        }
+    });
+
+
+    var nameField = new LiveValidation("name",{wait : 500});
+    nameField.add(Validate.Presence,{failureMessage: "Please enter name" });
+
+    var regidField = new LiveValidation("reg_id",{wait : 500});
+    regidField.add(Validate.Presence,{failureMessage: "Please enter Registration ID" });
+
+    var emailField = new LiveValidation("email",{wait : 500});
+    emailField.add(Validate.Presence,{failureMessage: "Please enter email" });
+    emailField.add(Validate.Email,{failureMessage: "Please enter a valid email" });
+
+    var passwordField = new LiveValidation("password",{wait : 500});
+    passwordField.add(Validate.Presence,{failureMessage: "Please enter password" });
+
+    var retypePasswordField = new LiveValidation("retype_password",{wait : 500});
+    retypePasswordField.add(Validate.Presence,{failureMessage: "Please retype password" });
+
+    retypePasswordField.add(Validate.Confirmation,{match : "password",failureMessage: "Passwords dosen't match" });
+
+
+});
+
+
+</script>
+
+</body>
+</html>

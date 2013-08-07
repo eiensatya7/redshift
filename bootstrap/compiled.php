@@ -2152,7 +2152,12 @@ class NativeSessionStorage implements SessionStorageInterface
         if ($destroy) {
             $this->metadataBag->stampNew();
         }
-        return session_regenerate_id($destroy);
+        $ret = session_regenerate_id($destroy);
+        session_write_close();
+        $backup = $_SESSION;
+        session_start();
+        $_SESSION = $backup;
+        return $ret;
     }
     public function save()
     {
@@ -3080,9 +3085,9 @@ abstract class ServiceProvider
         }
         return $namespace;
     }
-    public function commands()
+    public function commands($commands)
     {
-        $commands = func_get_args();
+        $commands = is_array($commands) ? $commands : func_get_args();
         $events = $this->app['events'];
         $events->listen('artisan.start', function ($artisan) use($commands) {
             $artisan->resolveCommands($commands);
@@ -7944,7 +7949,7 @@ class Route extends BaseRoute
     }
     public function setBeforeFilters($value)
     {
-        $filters = is_string($value) ? explode('|', $value) : (array) $value;
+        $filters = $this->parseFilterValue($value);
         $this->setOption('_before', array_merge($this->getBeforeFilters(), $filters));
     }
     public function getAfterFilters()
@@ -7953,8 +7958,16 @@ class Route extends BaseRoute
     }
     public function setAfterFilters($value)
     {
-        $filters = is_string($value) ? explode('|', $value) : (array) $value;
+        $filters = $this->parseFilterValue($value);
         $this->setOption('_after', array_merge($this->getAfterFilters(), $filters));
+    }
+    protected function parseFilterValue($value)
+    {
+        $results = array();
+        foreach ((array) $value as $filters) {
+            $results = array_merge($results, explode('|', $filters));
+        }
+        return $results;
     }
     public function setParameters($parameters)
     {

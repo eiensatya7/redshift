@@ -1,3 +1,4 @@
-<!-- footer -->
-<link href="css/main_layout/main_footer_layout.css" rel="stylesheet" type="text/css"/>
-<div id="bottom_div"></div>
+<!-- scripts-->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/livevalidation.js"></script>

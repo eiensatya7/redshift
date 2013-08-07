@@ -1,5 +1,29 @@
 <?php
 
+App::bind('StudentRepo',function(){
+
+	Log::info('Binding student repo');
+	return new StudentRepo;
+});
+App::bind('CollegeRepo',function(){
+
+	Log::info('Binding college repo');
+	return new CollegeRepo;
+});
+
+App::bind('RegistrationService',function(){
+	Log::info('Binding RegistrationService');
+	$rs = new RegistrationService();
+	$rs->setStudentRepo(App::make('StudentRepo'));
+	$rs->setCollegeRepo(App::make('CollegeRepo'));
+
+	return $rs;
+});
+
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Register The Laravel Class Loader
@@ -15,10 +39,14 @@ ClassLoader::addDirectories(array(
 
 	app_path().'/commands',
 	app_path().'/controllers',
+	app_path().'/services',
+	app_path().'/repositories',
 	app_path().'/models',
+	app_path().'/dataObjects',
+	app_path().'/registrar',
 	app_path().'/database/seeds',
 
-));
+	));
 
 /*
 |--------------------------------------------------------------------------

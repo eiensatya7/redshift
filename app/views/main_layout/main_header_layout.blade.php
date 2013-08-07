@@ -1,9 +1,15 @@
-<html>
-    <head></head>
-    <body>
+<div class="container redshift-topnav">
 
-<!-- header -->
-<link href="css/main_layout/main_header_layout.css" rel="stylesheet" type="text/css"/>
-<div id="top_div"></div>
-</body>
-</html>
+        <div class="row">
+            <div class="span6"><div class="redshift-logo">Red<div class="redshift-logo-sub">shift</div></div>
+
+        </div>
+
+        <div class="span1"><div class="redshift-link-box">HOME</div></div>
+        <div class="span1"><div class="redshift-link-box">ABOUT</div></div>
+        <div class="span1"><div class="redshift-link-box">REGISTER</div></div>
+        <div class="span1"><div class="redshift-link-box">REGISTER</div></div>
+        <div class="span1"><div class="redshift-link-box">LOGIN</div></div>
+        <div class="span1"><div class="redshift-link-box">LOGIN</div></div>
+    </div>
+</div>
